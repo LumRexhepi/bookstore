@@ -37,8 +37,8 @@
 			
 			<div class="form-group">
 				<label for="category">Category</label> 
-				<select id="category" th:fielf="*{Category}" class="form-control" >
-				<option disabled selected>Select one...</option>
+				<select id="category"  th:field="*{Category}" class="form-control" >
+				<option value="" disabled selected>Select one...</option>
 					<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text=${category.name}></option>
 				</select>
 			</div>
