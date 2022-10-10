@@ -39,8 +39,8 @@
 					<th>Year</th>
 					<th>Price</th>
 					<th>Category</th>
-					<th></th>
-					<th></th>
+					<th sec:authorize="hasAuthority('ADMIN')"></th>
+					
 
 				</tr>
 
@@ -52,8 +52,8 @@
 					<td th:text=${book.publishYear}></td>
 					<td th:text=${book.price}></td>
 					<td th:text="${book.category}? ${book.category.name}:''"></td>
-					<td style="text-align: left"><a
-						sec:authorize="hasRole('ADMIN')" th:href=@{/delete/{id}(id=${book.id})}
+					<td sec:authorize="hasAuthority('ADMIN')" style="text-align: left"><a
+						 th:href=@{/delete/{id}(id=${book.id})}
 						class="btn btn-outline-danger">Delete</a>&nbsp;<a
 						th:href=@{/edit/{id}(id=${book.id})}
 						class="btn btn-outline-warning">Edit</a></td>
