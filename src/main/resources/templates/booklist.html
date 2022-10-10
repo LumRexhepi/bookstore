@@ -1,22 +1,35 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">>
 <head>
 <title>Bookstore</title>
 <meta http-equiv="content-type" content="text/html ; charset=UTF-8">
-<script type ="text/javascript">
-
+<script type="text/javascript">
+	
 </script>
 <style>
+#header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	
+}
 
-
+.container{margin-top:2%;}
 </style>
 </head>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
 <body>
-	<h1>books</h1>
+	<div class="container" id="header">
+		<h1>Books</h1>
+		<h3 th:inline="text">Welcome  [[${#httpServletRequest.remoteUser}]]!</h3>
+		<form th:action="@{/logout}" method="post">
+			<input class="btn btn-danger" type="submit" value="Sign Out" />
+		</form>
 
-	<div class="container">
+	</div>
+
+	<div class="container" >
 		<div class="table-responsive">
 			<table class="table table-hover">
 				<tr>
@@ -27,20 +40,30 @@
 					<th>Price</th>
 					<th>Category</th>
 					<th></th>
-					
+					<th></th>
+
 				</tr>
 
 				<tr th:each="book: ${books}">
+
 					<td th:text="${book.author}"></td>
 					<td th:text="${book.title}"></td>
 					<td th:text=${book.isbn}></td>
 					<td th:text=${book.publishYear}></td>
 					<td th:text=${book.price}></td>
 					<td th:text="${book.category}? ${book.category.name}:''"></td>
-					<td style="text-align:left"><a th:href=@{/delete/{id}(id=${book.id})} class="btn btn-outline-danger">Delete</a>&nbsp;<a th:href=@{/edit/{id}(id=${book.id})} class="btn btn-outline-warning">Edit</a></td>
-					</tr>
+					<td style="text-align: left"><a
+						sec:authorize="hasRole('ADMIN')" th:href=@{/delete/{id}(id=${book.id})}
+						class="btn btn-outline-danger">Delete</a>&nbsp;<a
+						th:href=@{/edit/{id}(id=${book.id})}
+						class="btn btn-outline-warning">Edit</a></td>
+				</tr>
 			</table>
-			<a href="/add"><button class="btn btn-outline-primary">Add</button></a>
+			<div class="container" id="napit">
+				<a href="/add"><button class="btn btn-outline-primary">Add</button></a>
+
+
+			</div>
 		</div>
 	</div>
 </body>

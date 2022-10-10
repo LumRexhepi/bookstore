@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd20.bookstore.domain.Book;
@@ -21,9 +22,9 @@ import hh.swd20.bookstore.domain.CategoryRepository;
 @Controller
 public class BookController {
 
-	@GetMapping("/index")
+	@GetMapping("/")
 	public String frontpage() {
-		return "index"; // booklist.html
+		return "redirect:booklist"; // booklist.html
 	}
 
 	@Autowired
@@ -85,4 +86,10 @@ public class BookController {
 		return "editbook";
 	}
 
+
+    
+    @RequestMapping(value="/login")
+	public String login() {
+		return "login";
+	} 
 }
