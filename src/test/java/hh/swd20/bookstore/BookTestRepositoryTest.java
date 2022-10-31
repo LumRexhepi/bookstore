@@ -1,7 +1,6 @@
 package hh.swd20.bookstore;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,8 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import hh.swd20.bookstore.domain.Book;
 import hh.swd20.bookstore.domain.BookRepository;
-import hh.swd20.bookstore.domain.Category;
-
+import hh.swd20.bookstore.web.BookController;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,6 +22,16 @@ public class BookTestRepositoryTest {
 
 	@Autowired
 	private BookRepository brepository;
+	private BookController bcontroller;
+
+	@Test
+	public void contextLoads() throws Exception {
+		assertThat(brepository).isNotNull();
+	}
+
+	public void contextLoads2() throws Exception {
+		assertThat(bcontroller).isNotNull();
+	}
 
 	@Test
 	public void FindbyTitleTest() {
@@ -32,29 +40,6 @@ public class BookTestRepositoryTest {
 		assertThat(books).hasSize(1);
 		assertThat(books.get(0).getAuthor()).isEqualTo("testi");
 
-	}
-	
-	@Test
-	public void createNewBook () {
-		Book book = new Book("TestJUnit", "JUnit","234", 2000, 15.00, new Category("Fiction"));
-		brepository.save(book);
-		assertThat(book.getId()).isNotNull();
-	}
-	
-	@Test
-	public void deleteBook () {
-		long id =  4;
-		
-		brepository.deleteById(id);
-		assertThat(brepository.findById(id)).isEmpty();
-		
-	}
-	
-	public void findById () {
-		long id = 4;
-		  
-		assertThat(brepository.findById(id)).isNotNull();
-	
 	}
 
 }
