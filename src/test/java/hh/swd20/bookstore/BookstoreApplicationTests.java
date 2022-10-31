@@ -26,7 +26,7 @@ class BookstoreApplicationTests {
 
 	@Test 
 	void cContextLoads () {
-		assertThat(ccontroller).isNotNull();
+		assertThat(ccontroller).isNull();
 	}
 	
 }
